@@ -1,0 +1,22 @@
+
+
+.content {
+  width: 50%;
+  margin: auto;
+}
+
+span.faint-char {
+  display: inline;
+  color: #BBB;
+}
+
+span.hl-char {
+  display: inline;
+  color: #F33;
+}
+
+span.out-of-line {
+  color: #F33;
+  position: absolute;
+  border: solid black;
+}
