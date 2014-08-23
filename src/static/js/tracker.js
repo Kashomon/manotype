@@ -7,8 +7,7 @@ omtype.tracker = function(elemId, text) {
   this.elemId = elemId;
 
   // Arrays of text -- allow for easy manipulation
-  this.baseText = text.trim().split('');
-  this.currentText = this.baseText.slice();
+  this.baseText = text.trim();
 
   this.position = 0;
   this.mistakes = 0;
@@ -22,12 +21,36 @@ omtype.tracker = function(elemId, text) {
 omtype.tracker.prototype = {
   render: function() {
     this.lazyInitKeyHandler();
-
-    this.applyCharHighlight();
-    var joined = this.currentText.join('');
-    var p = joined.replace(/\n/g, '<span class="faint-char">¶</span><p>');
-    $('#' + this.elemId).html(p);
+    var text = this.applySpans(this.baseText);
+    $('#' + this.elemId).html(text);
     this.updateStats();
+  },
+
+  /** Turn the text into a list of spans. */
+  applySpans: function(inText) {
+    var out = [];
+    var postProcessFn = null;
+    for (var i = 0; i < inText.length; i++) {
+      var activeClass = null;
+      if (i === 0) { activeClass = 'active-char'; }
+
+      var char = inText.charAt(i);
+      if (char === '\n') {
+        var mark = '¶';
+        char = '<span class="faint-char">' + mark + '</span><br>';
+      } else if (char === '<') {
+        char = '&lt;'
+      } else if (char === '>') {
+        char = '&gt;'
+      }
+      var text = '<span class="base-char-class';
+      if (activeClass) {
+        text += ' ' + activeClass;
+      }
+      text += '">' + char + '</span>';
+      out.push(text);
+    }
+    return out.join('');
   },
 
   lazyInitKeyHandler: function() {
@@ -37,7 +60,7 @@ omtype.tracker.prototype = {
       }.bind(this));
       $('body').on('keydown', function(event) {
         var keyCode = event.keyCode;
-        if (keyCode === '8') { // backspace
+        if (keyCode === 8) { // backspace
           this.processKey(event.keyCode);
         }
       }.bind(this));
@@ -47,15 +70,20 @@ omtype.tracker.prototype = {
 
   updateStats: function() {
     if (!this.started) return;
-
     var startTime = this.startTime;
     var currentTime = new Date();
     var deltaSeconds = (currentTime.getTime() - startTime.getTime()) / 1000;
     var wpm = this.correctChars / 5 / (deltaSeconds / 60);
     var roundedWpm = Math.round(wpm * 100) / 100;
-    $('#WPM').text(roundedWpm);
-    $('#Errors').text(this.mistakes);
-    $('#Correct').text(this.correctChars);
+    $('#WPMStats').text(roundedWpm);
+    $('#ErrorsStats').text(this.mistakes);
+    $('#CorrectStats').text(this.correctChars);
+
+    var minutes = Math.floor(deltaSeconds / 60);
+    var secs = Math.round(deltaSeconds % 60)
+    $('#TimeStats').text(minutes + ':'
+        + (secs < 10 ? '0' : '')
+        + secs);
   },
 
   processKey: function(keyCode) {
@@ -66,19 +94,34 @@ omtype.tracker.prototype = {
     if (this.started === false) {
       this.started = true;
       this.startTime = new Date();
+      setTimeout(this.updateStats.bind(this))
     }
     var curChar = this.baseText[this.position];
-    if (keyName === curChar) {
+    if (keyName === curChar &&
+        this.position < this.baseText.length) {
       this.position++
       this.correctChars++;
-      this.render();
+      this.nextPos();
     } else if (keyName === 'BACKSPACE' && this.position > 0) {
       this.position--;
-      this.correctChars++;
-      this.render();
+      this.prevPos();
     } else {
       this.mistakes++;
     }
+  },
+
+  nextPos: function() {
+    var current = $('.active-char');
+    var next = current.next();
+    next.addClass('active-char');
+    current.removeClass('active-char');
+  },
+
+  prevPos : function() {
+    var current = $('.active-char');
+    var prev = current.prev();
+    prev.addClass('active-char');
+    current.removeClass('active-char');
   },
 
   applyCharHighlight: function() {

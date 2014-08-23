@@ -3,6 +3,8 @@
 .content {
   width: 50%;
   margin: auto;
+  font-family: Cousine;
+  font-size: 16px;
 }
 
 span.faint-char {
@@ -15,8 +17,18 @@ span.hl-char {
   color: #F33;
 }
 
+span.base-char-class {
+  display: inline;
+  margin-left: 1px;
+}
+
+
 span.out-of-line {
   color: #F33;
   position: absolute;
   border: solid black;
+}
+
+span.active-char {
+  background-color: cyan;
 }
