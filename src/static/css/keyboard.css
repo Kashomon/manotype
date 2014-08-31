@@ -63,3 +63,14 @@
   -moz-border-radius: 15px;
   -webkit-border-radius: 15px;
 }
+
+.key-left {
+  padding-left: 10px;
+  text-align: left;
+}
+
+.key-right {
+  padding-right: 10px;
+  text-align: right;
+}
+
