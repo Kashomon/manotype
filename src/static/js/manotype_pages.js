@@ -1,4 +1,4 @@
-omtype.pages = {
+manotype.pages = {
   insert: function(id, text) {
   },
 

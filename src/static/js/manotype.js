@@ -1,8 +1,8 @@
 (function() {
 
 // Global namespace
-omtype = {};
-omtype.keyCodeMap = {
+manotype = {};
+manotype.keyCodeMap = {
   0: 48, 1: 49, 2: 50, 3: 51, 4: 52, 5: 53, 6: 54, 7: 55, 8: 56, 9: 57,
 
   A: 65, B: 66, C: 67, D: 68, E: 69, F: 70, G: 71, H: 72, I: 73, J: 74, K: 75,
@@ -30,10 +30,10 @@ omtype.keyCodeMap = {
   BACKSPACE: 8
 };
 
-omtype.reverseMap = {};
-for (var key in omtype.keyCodeMap) {
-  var val = omtype.keyCodeMap[key];
-  omtype.reverseMap[val] = key;
+manotype.reverseMap = {};
+for (var key in manotype.keyCodeMap) {
+  var val = manotype.keyCodeMap[key];
+  manotype.reverseMap[val] = key;
 }
 
 })();

@@ -1,15 +1,29 @@
 
+* {
+  padding: 0px;
+  margin: 0px;
+}
+
+body {
+  background-image: url("../assets/background-dark.jpg");
+}
 
 .content {
   width: 50%;
   margin: auto;
-  font-family: Cousine;
-  font-size: 16px;
+  margin-top: 100px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 17px;
+  background:none;
+}
+
+.mano-panel {
+
 }
 
 span.faint-char {
   display: inline;
-  color: #BBB;
+  color: rgba(255,255,255,0.3);
 }
 
 span.hl-char {
@@ -20,8 +34,20 @@ span.hl-char {
 span.base-char-class {
   display: inline;
   margin-left: 1px;
+  color: rgba(255,255,255,0.6);
 }
 
+span.seen-correct-char {
+  display: inline;
+  margin-left: 1px;
+  color: rgba(0,0,0,0.4);
+}
+
+span.seen-incorrect-char {
+  display: inline;
+  margin-left: 1px;
+  color: rgba(255,0,0,0.4);
+}
 
 span.out-of-line {
   color: #F33;
@@ -30,5 +56,6 @@ span.out-of-line {
 }
 
 span.active-char {
-  background-color: cyan;
+  border-bottom: 1px solid white;
+  /* background-color: rgba(255,255,255,0.3); */
 }

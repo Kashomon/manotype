@@ -1,8 +1,8 @@
-omtype.init = function() {
-  omtype.currentTracker = new omtype.tracker(
+manotype.init = function() {
+  manotype.currentTracker = new manotype.tracker(
       'typer',
-      omtype.pages.whitman);
-  omtype.currentTracker.render();
+      manotype.pages.whitman);
+  manotype.currentTracker.render();
 };
 
-omtype.init();
+manotype.init();
