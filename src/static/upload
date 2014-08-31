@@ -1,0 +1,34 @@
+#!/bin/bash
+
+myarg="$1"
+if [ $myarg = "all" ]
+then
+  s3cmd put *.css s3://www.manotype.com --acl-public
+  s3cmd put *.html s3://www.manotype.com --acl-public
+  s3cmd put *.js s3://www.manotype.com --acl-public
+  s3cmd put --recursive libs s3://www.manotype.com --acl-public
+  s3cmd put --recursive assets s3://www.manotype.com --acl-public
+  # s3cmd put --recursive images s3://www.manotype.com --acl-public
+  # s3cmd put --recursive libs s3://www.manotype.com --acl-public
+  exit
+fi
+
+if [ $myarg = "js" ]
+then
+  s3cmd put --recursive js s3://www.manotype.com --acl-public
+  exit
+fi
+
+if [ $myarg = "css" ]
+then
+  s3cmd put --recursive css s3://www.manotype.com --acl-public
+  exit
+fi
+
+if [ $myarg = "libs" ]
+then
+  s3cmd put --recursive libs s3://www.manotype.com --acl-public
+  exit
+fi
+
+s3cmd put $myarg s3://www.manotype.com/$myarg --acl-public
