@@ -1,0 +1,32 @@
+Styling notes
+
+Logo
+Logo Color - #434659
+Logo Box - #b1b5cb
+
+Top Bar
+Top Bar - #cccfdc 
+
+Left Bar
+Left Bar - #434659
+Button Icon Color - #282744
+Left Bar Line Color - #757785
+
+Lessons Section 
+Lesson Button - #3b3957
+High-Lighted Button - #4b3f7f
+Unselected Line Color - #29204c
+Font Color Heading - #a7aac0
+Font Color Subheading - #757785
+
+
+Main Section
+
+Typing Section
+Typed Section - #50525c
+UnTyped Section - #c4c7d4
+Font - Museo Slab 500
+
+Purple Selected Key  
+Outline Key - #af93fe
+Inside Key - #3b2b6d
